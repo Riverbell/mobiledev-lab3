@@ -1,0 +1,48 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>PubNub Test</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, height=device-height initial-scale=1">
+
+	<!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="red">
+    <meta name="mobile-web-app-capable" content="yes">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="red">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+	<!-- Our stylesheet -->
+	<link rel="stylesheet" href="pubnubtest.css">
+	
+	<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+<header>
+  <h1>PubNub x Giphy Chat Demo</h1>
+</header>
+
+<section id="main" role="main">
+  <h2>Type <strong>\giphy [something]</strong> to get a random gif animation! - e.g. "<strong>\giphy funny cat</strong>". Of course you can just chat too.</h2>
+  <div id="chat">
+    <i id="avatar" class="face12"></i>
+    <input type="text" id="input" placeholder="Type your message..."> 
+    <button id="button">Send</button>
+  </div>
+  
+  <p id="presence"></p>
+  <div id="output"></div>
+</section>
+
+<script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+	<script src="http://cdn.pubnub.com/pubnub-3.14.5.min.js"></script>
+	<script src="pubnubtest.js"></script>
+</body>
+</html>

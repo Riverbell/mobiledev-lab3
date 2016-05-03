@@ -8,6 +8,43 @@
 
   console.log(output);
   var channel = 'Test';
+  if(window.DeviceOrientationEvent) { //Do something }
+    console.log("Supporting DeviceOrientationEvent");
+    var devOri = document.getElementById('devOri');
+    //console.log(devOri);
+    var orientation;
+    //var tempOrientation;
+
+    window.addEventListener('deviceorientation', function(event) {
+      var alpha = event.alpha;
+      console.log(alpha);
+      if (alpha != null){
+        if (alpha < 45 && alpha > 0 || alpha > 315 && alpha < 360) {
+          orientation = 'north';
+        } else if (alpha > 45 && alpha < 135) {
+          orientation = 'west';
+        } else if (alpha > 135 && alpha < 225) {
+          orientation = 'south';
+        } else if (alpha > 225 && alpha < 315) {
+          orientation = 'east';
+        }
+        if (orientation != channel) {
+          console.log("yo");
+          devOri.innerHTML = orientation;
+          channel = orientation;
+          getHistory();
+        }
+      } else {
+        console.log("alpha null");
+        channel = 'Test';
+        getHistory();
+      }
+      
+    }, false);
+    
+  
+  }
+
 
   // Assign a random avatar in random color
   avatar.className = 'face-' + ((Math.random() * 13 + 1) >>> 0) + ' color-' + ((Math.random() * 10 + 1) >>> 0);
@@ -19,26 +56,31 @@
   });
 
   // PubNub Playback to fetch past messages
-  p.history({
-    channel: channel,
-    count: 50,
-    callback: function(messages) {
-      p.each(messages[0], function(m) {
-        var content = '<p><i class="' + m.avatar + '"></i><span>';
+  function getHistory() {
+    console.log("Gets history");
+    output.innerHTML = ''; //empties the div for the old channel
+    p.history({
+      channel: channel,
+      count: 50,
+      callback: function(messages) {
+        p.each(messages[0], function(m) {
+          var content = '<p><i class="' + m.avatar + '"></i><span>';
 
-        if (m.text) {
-          content += m.text.replace(/[<>]/ig, '');
-        }
-        if (m.gif) {
-          console.log('giphy added...');
-          content += '<img src="' + m.gif + '">'
-        }
-        content += '</span></p>';
+          if (m.text) {
+            content += m.text.replace(/[<>]/ig, '');
+          }
+          if (m.gif) {
+            console.log('giphy added...');
+            content += '<img src="' + m.gif + '">'
+          }
+          content += '</span></p>';
 
-        output.innerHTML = content + output.innerHTML;
-      });
-    }
-  });
+          output.innerHTML = content + output.innerHTML;
+        });
+      }
+    });
+  };
+  //getHistory();
 
   var actionUser = '';
 
